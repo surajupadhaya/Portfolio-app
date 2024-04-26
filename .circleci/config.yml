@@ -18,9 +18,9 @@ jobs:
       - run :
            name: Build the image from Docker file 
            command: |
-             docker build -t suru12/portflask-cci:v1 .
+             docker build -t $Hub_user/portflask-cci:v1 .
              echo $Hub_Pass |docker login -u $Hub_user --password-stdin
-             docker push suru12/portflask-cci:v1
+             docker push $Hub_user/portflask-cci:v1
   deploy:
     machine:
       image: ubuntu-2204:2024.01.2
@@ -44,7 +44,7 @@ jobs:
       - run :
            name: Run the docker container with suraj/portflask-cci:v1 images 
            command: |
-              docker run -d  --name portfolio -p 5500:5000 suru12/portflask-cci:v1
+              docker run -d  --name portfolio -p 5500:5000 $Hub_user/portflask-cci:v1
               sleep 20 
               curl localhost:5500
 
